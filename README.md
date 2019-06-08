@@ -2,7 +2,7 @@
 This repo represents dev environment with 3 VMs
 - **app01** - representing our counter
 - **db01**  - representing our Database (where counter state has been saved)
-- **vault** - representing our Vault server
+- **vault01** - representing our Vault server
 
 ## Requirements
 - [Virtualbox installed](https://www.virtualbox.org/)
@@ -14,7 +14,7 @@ This repo represents dev environment with 3 VMs
 | conf/redis.conf | redis configuration |
 | scripts/app01_provision.sh | provision script for app01 VM |
 | scripts/db01_provision.sh | provision script for db01 VM |
-| scripts/vault_provision.sh | provision script for vault VM |
+| scripts/vault01_provision.sh | provision script for vault01 VM |
 | Vagrantfile | Vagrant configuration file |
 | cli.rb | ruby application - counter |
 
