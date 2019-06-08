@@ -16,6 +16,7 @@ This repo represents dev environment with 3 VMs
 | scripts/db01_provision.sh | provision script for db01 VM |
 | scripts/vault_provision.sh | provision script for vault VM |
 | Vagrantfile | Vagrant configuration file |
+| cli.rb | ruby application - counter |
 
 ## How to use this Project
 - `git clone https://github.com/berchev/pagecounter-ruby.git` - download the project
