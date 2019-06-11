@@ -18,6 +18,9 @@ which redis-cli || {
   apt-get install -y redis-tools
 }
 
+# If gem vault is not installed, install it
+gem list -i vault || gem install vault
+
 # Download and install latest version of vault if not installed
 [ -f "/usr/local/bin/vault" ] || {
   pushd /usr/local/bin
