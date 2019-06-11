@@ -19,7 +19,7 @@ This repo represents dev environment with 3 VMs
 | cli.rb | ruby application - counter |
 
 ## Description
-**cli.rb** will authenticate against **db01** using vault token, provided by **vault01**
+**app01**(cli.rb) will authenticate against **db01**(redis) using vault token, provided by **vault01**(vault server)
 
 ## Setup dev environment
 - `git clone https://github.com/berchev/pagecounter-ruby.git` - download the project
