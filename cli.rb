@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Counter application using redis database
+# Counter application using vault authentication against redis database
 
 # Load redis library
 require "redis"
@@ -8,14 +8,33 @@ require "redis"
 # Load vault library
 require "vault"
 
-# Add Vault configuration:
-Vault.configure do |config|
-  config.address = ENV['VAULT_ADDR']
-  config.token = ENV['VAULT_TOKEN']
-end
-
 # Add vault secret engine path as variable for convenience
 secret_path = "database/redis"
+
+# Declaring Vault server address
+Vault.configure { |config| config.address = "http://192.168.56.31:8200" }
+
+
+# Get role_id
+role_id = File.open("role_id.txt", "r") { |file| file.read }
+
+# Get secret_id 
+secret_id = File.open("secret_id.txt", "r") { |file| file.read }
+
+# Login to vault using role_id and secret_id 
+login = Vault.auth.approle(
+  role_id,
+  secret_id,
+)
+
+# Extracting token value
+#token = login.auth.client_token
+
+# Create new connection to vault server using extracted token value
+#vault_server = Vault::Client.new(
+#    address: "http://192.168.56.31:8200",
+#    token: token
+#)
 
 # Get th key/value pair from vault
 secret = Vault.logical.read(secret_path)
