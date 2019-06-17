@@ -22,3 +22,7 @@ vault read auth/approle/role/cli/role-id | grep 'role_id' | awk '{print $2}' > r
 
 # generate secret_id
 vault write -f auth/approle/role/cli/secret-id | grep 'secret_id '| awk '{print $2}' > secret_id.txt
+
+# generate clinet_token  
+vault write auth/approle/login role_id="$(cat role_id.txt)" \
+	secret_id="$(cat secret_id.txt)" | grep 'token ' | awk '{print $2}' > client_token.txt
