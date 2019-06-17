@@ -56,6 +56,6 @@ This repo represents dev environment with 3 VMs
 - [x] Include Vault VM
 - [x] Set password for redis database on VM **db01**
 - [x] Make app connecting using hardcoded password
-- [x] Store password in key/value store in Vault- [ ] Useapprole
-- [x] Useapprole
+- [x] Store password in key/value store in Vault
+- [x] Use approle
 - [x] Create new token, and use it in order to take Redis password (do NOT use root token)
