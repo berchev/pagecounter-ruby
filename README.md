@@ -34,18 +34,21 @@ This repo represents dev environment with 3 VMs
 
 ## Vault setup
 - `vagrant ssh vault01` - connect to vault01 machine
+- `cd /vagrant`
 - `export VAULT_DEV_ROOT_TOKEN_ID=changeme` - set ENV variable **changeme**, which is going to be default root token when Vault server is started
 - `vault server -dev -dev-listen-address 0.0.0.0:8200` - start Vault server in dev mode, listening on all IP addresses
 - connect to vault server from another terminal
+- `cd /vagrant`
 - `bash set_vault.sh` - this script is going to configure your vault server (add secret engine, add secret, enable approle, generate role_id and secret_id)
 
 ## Run Counter
 - open another terminal for our app01 machine
 - `vagrant ssh app01` - in order to connect to app01
+- `cd /vagrant`
 - `ruby cli.rb` - in order to run ruby counter 
 
 ## NOTES
-**Note that there is lines commented in cli.rb. Counter is not supposed to work without Token, and New connection, but it WORKS!
+**Note that there is lines commented in cli.rb. Counter is not supposed to work without Token, and New connection, but it WORKS!**
 
 
 ## TODO
