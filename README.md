@@ -17,9 +17,10 @@ This repo represents dev environment with 3 VMs
 | scripts/vault01_provision.sh | provision script for vault01 VM |
 | Vagrantfile | Vagrant configuration file |
 | cli.rb | ruby application - counter |
+| clinet-id-factory.sh | vault server configuration script |
 
 ## Description
-**app01**(cli.rb) will authenticate against **db01**(redis) using vault token, provided by **vault01**(vault server)
+**app01**(cli.rb) will authenticate against **db01**(redis) using approle vault token, provided by **vault01**(vault server)
 
 ## Setup dev environment
 - `git clone https://github.com/berchev/pagecounter-ruby.git` - download the project
@@ -34,32 +35,27 @@ This repo represents dev environment with 3 VMs
 
 ## Vault setup
 - `vagrant ssh vault01` - connect to vault01 machine
-- `cd /vagrant`
+- `cd /vagrant` - change to /vagrant directory
 - `export VAULT_DEV_ROOT_TOKEN_ID=changeme` - set ENV variable **changeme**, which is going to be default root token when Vault server is started
 - `vault server -dev -dev-listen-address 0.0.0.0:8200` - start Vault server in dev mode, listening on all IP addresses
 - connect to vault server from another terminal
-- `cd /vagrant`
-- `bash set_vault.sh` - this script is going to configure your vault server (add secret engine, add secret, enable approle, generate role_id and secret_id)
+- `cd /vagrant` - change to /vagrant directory
+- `bash scripts/clinet-id-factory.sh` - this script is going to configure your vault server (add kv secret engine version 1, add secret, enable approle, generate role_id and secret_id, generate client_token)
 
 ## Run Counter
 - open another terminal for our app01 machine
 - `vagrant ssh app01` - in order to connect to app01
-- `cd /vagrant`
-- `ruby cli.rb` - in order to run ruby counter 
-
-## NOTES
-**Note that there is lines commented in cli.rb. Counter is not supposed to work without Token, and New connection, but it WORKS!**
-
+- `cd /vagrant` - change to /vagrant directory
+- `ruby cli.rb` - in order to run ruby counter
 
 ## TODO
-- [ ] Create new token, and use it in order to take Redis password (do NOT use root token)
-- [ ] Create token with TTL (time to live)
-- [ ] Use dynamic secrets
- 
+
+
 ## DONE
 - [x] Install Vault to **app01**
 - [x] Include Vault VM
 - [x] Set password for redis database on VM **db01**
 - [x] Make app connecting using hardcoded password
-- [x] Store password in key/value store in Vault
-- [x] App get the password from key/value store
+- [x] Store password in key/value store in Vault- [ ] Useapprole
+- [x] Useapprole
+- [x] Create new token, and use it in order to take Redis password (do NOT use root token)
