@@ -37,16 +37,16 @@ This repo represents dev environment with 3 VMs
 - `export VAULT_DEV_ROOT_TOKEN_ID=changeme` - set ENV variable **changeme**, which is going to be default root token when Vault server is started
 - `vault server -dev -dev-listen-address 0.0.0.0:8200` - start Vault server in dev mode, listening on all IP addresses
 - connect to vault server from another terminal
-- `export VAULT_ADDR='http://0.0.0.0:8200'` - export vault server address
-- `vault secrets enable -path="database" -version=1 kv` - create secret kv engine with path database version 1 (vault gem is working with version 1)
-- `vault kv put database/redis password=georgiman` - write secret redis with key-value pair password=georgiman (in short creating password georgiman for our database)
+- `bash set_vault.sh` - this script is going to configure your vault server (add secret engine, add secret, enable approle, generate role_id and secret_id)
 
 ## Run Counter
 - open another terminal for our app01 machine
 - `vagrant ssh app01` - in order to connect to app01
-- `export VAULT_ADDR="http://192.168.56.31:8200"` - export Vault address as ENV variable
-- `export VAULT_TOKEN="changeme"` - export Vault root token as ENV variable
 - `ruby cli.rb` - in order to run ruby counter 
+
+## NOTES
+**Note that there is lines commented in cli.rb. Counter is not supposed to work without Token, and New connection, but it WORKS!
+
 
 ## TODO
 - [ ] Create new token, and use it in order to take Redis password (do NOT use root token)
